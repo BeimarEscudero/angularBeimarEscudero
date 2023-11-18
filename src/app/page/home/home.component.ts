@@ -34,8 +34,7 @@ export class HomeComponent implements OnInit {
     };
     this.language.postLanguage(body).subscribe((data) => {
       if (data != null) {
-        this.loadLanguages(); // Vuelve a cargar los datos después de guardar
-      }
+        this.loadLanguages();
     });
   }
 
@@ -44,7 +43,7 @@ export class HomeComponent implements OnInit {
     if (!aux) return;
     this.language.deleteLanguage(id).subscribe((data) => {
       if (data == null) {
-        this.loadLanguages(); // Vuelve a cargar los datos después de eliminar
+        this.loadLanguages();
       }
     });
   }
@@ -63,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   guardar() {
     this.language.updateLanguage(this.editRow.id, this.editRow).subscribe(() => {
-      this.loadLanguages(); // Vuelve a cargar los datos después de guardar
+      this.loadLanguages();
       this.isEditing = false;
       this.editRow = null;
     });
