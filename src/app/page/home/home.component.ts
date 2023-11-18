@@ -8,8 +8,8 @@ import { LanguagesService } from 'src/app/services/languages.service';
 })
 export class HomeComponent implements OnInit {
   
-  name: string = "Python";
-  abrev: string = "Py";
+  name: string = "";
+  abrev: string = "";
   dataSource: any = [];
 
   isEditing = false;
