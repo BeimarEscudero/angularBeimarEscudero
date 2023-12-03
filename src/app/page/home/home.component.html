@@ -1,80 +1,89 @@
-<header>
-    <div class="sup-header">
-      <span id="logo">SEGUNDO PARCIAL</span>
-    </div>
 
-    <section class="banner">
+<app-header></app-header>
+<header>
+  <div class="sup-header">
+    <span id="logo">SEGUNDO PARCIAL</span>
+  </div>
+
+  <section class="banner">
+    <div>
+      <h1>NOMBRE: BEIMAR HERNAN ESCUDERO APAZA</h1>
+      <h1>CI: 8563182</h1>
+    </div>
+  </section>
+</header>
+<div class="form-container">
+  <form *ngIf="!isEditing">
+    <label>Nombres</label><br />
+    <input type="text" [(ngModel)]="name" name="name" /><br />
+
+    <label>Abrev:</label><br />
+    <input type="text" [(ngModel)]="abrev" name="abrev" /><br />
+
+    <input type="button" value="Enviar" (click)="save()" />
+  </form>
+
+  <form *ngIf="isEditing">
+    <label>Nombres</label><br />
+    <input type="text" [(ngModel)]="editRow.name" name="name" /><br />
+
+    <label>Abrev:</label><br />
+    <input type="text" [(ngModel)]="editRow.abrev" name="abrev" /><br />
+
+    <input type="button" value="Guardar" (click)="guardar()" />
+    <input type="button" value="Cancelar" (click)="cancelarEdicion()" />
+  </form>
+</div>
+
+<div class="table-container">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Nro</th>
+        <th>Abrev.</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of dataSource; index as nro">
+        <td>{{ nro + 1 }}</td>
+        <td>
+          {{ !isEditing || row.id !== editRow?.id ? row.abrev : "" }}
+        </td>
+        <td>
+          {{ !isEditing || row.id !== editRow?.id ? row.name : "" }}
+        </td>
+        <td>
+          <ng-container
+            *ngIf="!isEditing || row.id !== editRow?.id; else editMode"
+          >
+            <button class="action-button" (click)="actualizar(row.id)">
+              Editar
+            </button>
+            <button class="action-button" (click)="borrar(row.id)">
+              Eliminar
+            </button>
+          </ng-container>
+          <ng-template #editMode>
+            <button class="action-button" (click)="guardar()">Guardar</button>
+            <button class="action-button" (click)="cancelarEdicion()">
+              Cancelar
+            </button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 2.O.15 VARIABLES"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
       <div>
-        <h1>NOMBRE: BEIMAR HERNAN ESCUDERO APAZA</h1>
-        <h1>CI: 8563182</h1>
-      </div>
-    </section>
-    <div class="form-container">
-      <form *ngIf="!isEditing">
-        <label>Nombres</label><br>
-        <input type="text" [(ngModel)]="name" name="name"><br>
-    
-        <label>Abrev:</label><br>
-        <input type="text" [(ngModel)]="abrev" name="abrev"><br>
-    
-        <input type="button" value="Enviar" (click)="save()">
-      </form>
-    
-      <form *ngIf="isEditing">
-        <label>Nombres</label><br>
-        <input type="text" [(ngModel)]="editRow.name" name="name"><br>
-    
-        <label>Abrev:</label><br>
-        <input type="text" [(ngModel)]="editRow.abrev" name="abrev"><br>
-    
-        <input type="button" value="Guardar" (click)="guardar()">
-        <input type="button" value="Cancelar" (click)="cancelarEdicion()">
-      </form>
-    </div>
-    
-    <div class="table-container">
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <th>Nro</th>
-            <th>Abrev.</th>
-            <th>Nombre</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of dataSource; index as nro">
-            <td>{{nro + 1}}</td>
-            <td>
-              {{!isEditing || row.id !== editRow?.id ? row.abrev : ''}}
-            </td>
-            <td>
-              {{!isEditing || row.id !== editRow?.id ? row.name : ''}}
-            </td>
-            <td>
-              <ng-container *ngIf="!isEditing || row.id !== editRow?.id; else editMode">
-                <button class="action-button" (click)="actualizar(row.id)">Editar</button>
-                <button class="action-button" (click)="borrar(row.id)">Eliminar</button>
-              </ng-container>
-              <ng-template #editMode>
-                <button class="action-button" (click)="guardar()">Guardar</button>
-                <button class="action-button" (click)="cancelarEdicion()">Cancelar</button>
-              </ng-template>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-  </header>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 2.O.15 VARIABLES"</h2>
-    </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+        <pre>
               <code>
                 let n1 = "Maxwell Wright";
                 let t1 = "(0191) 719 6495";
@@ -99,18 +108,18 @@
                 console.log(e3);   
               </code>
           </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 2.2.5 DATA TYPES"</h2>
     </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+  </section>
+</main>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 2.2.5 DATA TYPES"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
+      <div>
+        <pre>
                 <code>
                   let contactos = [
                     nombre: "Maxwell Wright",
@@ -131,18 +140,18 @@
                     ];
                 </code>
             </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 3.2.5 INTERACTION"</h2>
     </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+  </section>
+</main>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 3.2.5 INTERACTION"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
+      <div>
+        <pre>
                 <code>
                   let nuevoNombre = prompt("Ingrese el nombre del nuevo contacto:");
                   let nuevoTelefono = prompt("Ingrese el teléfono del nuevo contacto:");
@@ -162,18 +171,18 @@
                   console.log(`$contactos[ultimo].nombre/ $contactos[ultimo].telefono / $contactos[ultimo].correo`); 
                 </code>
             </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 4.0.9 CONDITIONAL EXECUTION"</h2>
     </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+  </section>
+</main>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 4.0.9 CONDITIONAL EXECUTION"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
+      <div>
+        <pre>
                 <code>
                   let opcion = prompt("1. Mostrar el primer contacto\n2. Mostrar el último contacto\n3. Agregar un nuevo contacto");
 
@@ -206,18 +215,18 @@ if (opcion === "1")
 
                 </code>
             </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 4.1.12 LOOPS"</h2>
     </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+  </section>
+</main>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 4.1.12 LOOPS"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
+      <div>
+        <pre>
                 <code>
                   /* let contacts = [
    name: "Juan", phone: "123-456-7890", email: "juan@email.com" ,
@@ -279,18 +288,18 @@ while (opcion !== "salir")
       console.log("Opción inválida. Por favor, elige una acción válida.");
                 </code>
             </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 5.1.11 (PARTE 1)"</h2>
     </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+  </section>
+</main>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 5.1.11 (PARTE 1)"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
+      <div>
+        <pre>
                 <code>
                   let op;
 while (op !== "quit") 
@@ -353,18 +362,18 @@ function agregarNuevoContacto(contacts, name, phone, email)
 
                 </code>
             </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <main>
-    <div class="titles">
-      <h2>"LABORATORIO 5.1.12 (PARTE 2)"</h2>
     </div>
-    <section class="container itemsApps">
-      <div class="item">
-        <div>
-          <pre>
+  </section>
+</main>
+<main>
+  <div class="titles">
+    <h2>"LABORATORIO 5.1.12 (PARTE 2)"</h2>
+  </div>
+  <section class="container itemsApps">
+    <div class="item">
+      <div>
+        <pre>
                 <code>
                   let contacts = [
  
@@ -483,29 +492,26 @@ function ordenarContactos()
 
                 </code>
             </pre>
-        </div>
       </div>
-    </section>
-  </main>
-  <footer>
-    <section class="footer-banner">
-      <div>
-        <h1>SIS-414-G1</h1>
-        <p>
-          <span></span>
-          <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Explicabo minima iste rerum alias nobis blanditiis obcaecati,
-            corporis nesciunt! Ut, quod. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Perferendis consectetur incidunt
-            delectus error id cumque.
-            </span
-          >
-      
-        </p>
-      </div>
-      <div>
-        <button>CERRAR</button>
-      </div>
-    </section>
-  </footer>
+    </div>
+  </section>
+</main>
+<footer>
+  <section class="footer-banner">
+    <div>
+      <h1>SIS-414-G1</h1>
+      <p>
+        <span></span>
+        <span
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+          minima iste rerum alias nobis blanditiis obcaecati, corporis nesciunt!
+          Ut, quod. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Perferendis consectetur incidunt delectus error id cumque.
+        </span>
+      </p>
+    </div>
+    <div>
+      <button>CERRAR</button>
+    </div>
+  </section>
+</footer>
