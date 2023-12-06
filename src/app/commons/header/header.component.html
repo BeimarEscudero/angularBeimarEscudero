@@ -7,7 +7,8 @@
             <a href="#" (click)="salir()" *ngIf="user!=null">Salir</a>
         </li>
         <li style="float:right">
-            <a class="active" routerLink="/login">Login <span *ngIf="user!=null">{{user}}</span> ||||||||||||||||||</a>
+            <a class="active" routerLink="/login">Login <span *ngIf="user!=null">{{user}}</span> |</a>
+            <a class="active" routerLink="/register">Registrar<span *ngIf="user!=null">{{user}}</span> |</a>
         </li>
       </ul>    
 </div>
