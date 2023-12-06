@@ -11,7 +11,8 @@ export class RegisterComponent {
 
   email:string = "";
   pass:string = "";
-
+  nombre:string = "";
+  apellido:string = "";
   constructor(private authService:AuthService, private router:Router){}
 
   guardar(){
